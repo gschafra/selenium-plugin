@@ -335,7 +335,7 @@ public class PluginImpl extends Plugin implements Action, Serializable, Describa
             public Collection<SeleniumTestSlotGroup> call() {
                 Map<URL, SeleniumTestSlotGroup> groups = new HashMap<URL, SeleniumTestSlotGroup>();
 
-                if (HubHolder.getHub() == null) {
+                if (!HubHolder.hasHub()) {
                     return Collections.emptyList();
                 }
 

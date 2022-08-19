@@ -7,8 +7,9 @@ import hudson.remoting.Channel;
 import jenkins.model.Jenkins;
 import jenkins.security.MasterToSlaveCallable;
 import org.apache.commons.lang.StringUtils;
-import org.openqa.grid.internal.utils.CapabilityMatcher;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.grid.data.SlotMatcher;
 
 import java.io.IOException;
 import java.util.Map;
@@ -16,11 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * {@link CapabilityMatcher} that adds "jenkins.label" support.
+ * {@link SlotMatcher} that adds "jenkins.label" support.
  * 
  * @author Kohsuke Kawaguchi
  */
-public class JenkinsCapabilityMatcher implements CapabilityMatcher {
+public class JenkinsCapabilityMatcher implements SlotMatcher {
 
     private static final Logger LOGGER = Logger.getLogger(JenkinsCapabilityMatcher.class.getName());
     /**
@@ -39,26 +40,27 @@ public class JenkinsCapabilityMatcher implements CapabilityMatcher {
      */
     public static final String MASTER_NAME = "(master)";
 
-    private final CapabilityMatcher base;
+    private final SlotMatcher base;
 
     private final Channel master;
 
-    public JenkinsCapabilityMatcher(Channel master, CapabilityMatcher base) {
+    public JenkinsCapabilityMatcher(Channel master, SlotMatcher base) {
         this.master = master;
         this.base = base;
     }
 
-    public boolean matches(Map<String, Object> currentCapability, Map<String, Object> requestedCapability) {
-        LOGGER.log(Level.INFO, "CURRENT : " + currentCapability.toString());
-        LOGGER.log(Level.INFO, "REQUEST : " + requestedCapability.toString());
+    @Override
+    public boolean matches(Capabilities stereotype, Capabilities capabilities) {
+        LOGGER.log(Level.INFO, "CURRENT : " + stereotype.toString());
+        LOGGER.log(Level.INFO, "REQUEST : " + capabilities.toString());
 
-        if (!base.matches(currentCapability, requestedCapability)) {
+        if (!base.matches(stereotype, capabilities)) {
             return false;
         }
 
-        Object label = requestedCapability.get(LABEL);
-        Object reqNode = requestedCapability.get(NODE_NAME);
-        String nodeName = (String) currentCapability.get(NODE_NAME);
+        Object label = capabilities.getCapability(LABEL);
+        Object reqNode = capabilities.getCapability(NODE_NAME);
+        String nodeName = (String) stereotype.getCapability(NODE_NAME);
 
         if (label == null && reqNode == null) {
             return true;

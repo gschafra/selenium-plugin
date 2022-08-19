@@ -20,4 +20,8 @@ public class HubHolder {
     public static void setHub(Hub hub) {
         HubHolder.hub = hub;
     }
+
+    public static boolean hasHub() {
+        return HubHolder.hub != null;
+    }
 }
