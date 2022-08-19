@@ -2,8 +2,9 @@ package hudson.plugins.selenium;
 
 import jenkins.security.MasterToSlaveCallable;
 import org.jfree.util.Log;
-import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
-import org.openqa.grid.web.Hub;
+import org.openqa.selenium.grid.commands.Hub;
+import org.openqa.selenium.grid.config.Config;
+import org.openqa.selenium.grid.server.Server;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,9 +39,9 @@ public class HubLauncher extends MasterToSlaveCallable<Void, Exception> {
             log.log(Level.OFF, "Grid hub starting with log level " + logLevel.getName());
             log.log(Level.OFF, "Grid Hub preparing to start on port " + port);
 
-            GridHubConfiguration c = ConfigurationBuilder.buildHubConfig(args, port);
-            Hub hub = new Hub(c);
-            hub.start();
+            Config config = ConfigurationBuilder.buildHubConfig(args, port);
+            Hub hub = new Hub();
+            Server<?> server = hub.asServer(config).start();
             HubHolder.setHub(hub);
 
             StringBuilder arguments = new StringBuilder();

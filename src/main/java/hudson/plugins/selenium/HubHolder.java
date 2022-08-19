@@ -1,6 +1,6 @@
 package hudson.plugins.selenium;
 
-import org.openqa.grid.web.Hub;
+import org.openqa.selenium.grid.commands.Hub;
 
 /**
  * Used inside Hub JVM to hold the reference to the running {@link Hub}
