@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Feb 21 15:59:47 CET 2023
+htmlunit-driver-standalone-2.67.0.jar>=
+htmlunit-driver-standalone-2.67.0.pom>=

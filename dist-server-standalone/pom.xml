@@ -12,7 +12,7 @@
 
     <properties>
         <selenium.version>3.141.59</selenium.version>
-        <htmlunit.driver.version>2.64.0</htmlunit.driver.version>
+        <htmlunit.driver.version>2.67.0</htmlunit.driver.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
