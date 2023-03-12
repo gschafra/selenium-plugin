@@ -87,11 +87,14 @@ public final class SeleniumProcessUtils {
         vmb.classpath().addJarOf(Channel.class);
         vmb.mainClass(Launcher.class);
 
-        vmb.args().add("-cp").add(classpath);
+        // FIXME -cp not longer supported
+        // @see https://github.com/jenkinsci/remoting/pull/468/files
+        // vmb.args().add("-cp").add(classpath);
         vmb.args().add("-connectTo", "localhost:" + serverSocket.getLocalPort());
 
         // TODO add XVFB options here
-        Proc p = vmb.launch(new LocalLauncher(listener)).stdout(listener).envs(envVariables).start();
+        LocalLauncher localLauncher = new LocalLauncher(listener);
+        Proc p = vmb.launch(localLauncher).stdout(listener).envs(envVariables).start();
 
         Socket s = serverSocket.accept();
         serverSocket.close();

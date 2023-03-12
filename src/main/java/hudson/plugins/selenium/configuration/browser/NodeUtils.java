@@ -43,7 +43,7 @@ public class NodeUtils {
     }
 
 
-    public static String uploadFileToNode(Computer computer, URL url, String outputFileName) {
+    public static String uploadFileToNode(Computer computer, URL url, final String outputFileName) {
         try {
             final InputStream is = new RemoteInputStream(url.openStream(), RemoteInputStream.Flag.GREEDY);
             return computer.getNode().getRootPath().act(new MasterToSlaveFileCallable<String>() {

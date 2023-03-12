@@ -71,6 +71,10 @@ public class SeleniumCallable extends MasterToSlaveFileCallable<String> {
 
         File localSeleniumJar = new File(f, seleniumJar.getName());
         File localHtmlUnitDriverJar = new File(f, htmlUnitDriverJar.getName());
+        // FIXME No longer allowed due to jenkins security changes
+        // @see https://github.com/gschafra/selenium-plugin/issues/1
+        // Temporary workaround: Copy files manually
+        /*
         if (localSeleniumJar.lastModified() != seleniumJarTimestamp) {
             try {
                 seleniumJar.copyTo(new FilePath(localSeleniumJar));
@@ -87,6 +91,7 @@ public class SeleniumCallable extends MasterToSlaveFileCallable<String> {
                 throw new IOException("Failed to copy htmlunit driver jar", e);
             }
         }
+        */
 
         try {
 

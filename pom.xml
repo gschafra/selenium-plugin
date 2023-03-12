@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>selenium</artifactId>
-	<version>3.12.1-SNAPSHOT</version>
+	<version>3.13.1-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<name>Jenkins Selenium Plugin</name>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Selenium+Plugin</url>
@@ -26,6 +26,8 @@
 		<htmlunit.version>2.67.0</htmlunit.version>
 		<!--<java.level>11</java.level>-->
 		<java.version>11</java.version>
+
+		<enforcer.skip>true</enforcer.skip>
 	</properties>
 
 	<build>
